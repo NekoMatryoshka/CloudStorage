@@ -1,0 +1,15 @@
+.login-background {
+    background-color: #fff;
+    background-image: url(img/backgroundImg.jpeg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 66.6%;
+    /*min-height: 800px;*/
+    /*max-height: 30%;*/
+    /*min-height: 30%;*/
+    overflow: hidden;
+    width: 100%;
+}
