@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="uk.ac.herts.jw17aca.cloudstorage.mapper.DiskMapper">
+
+	<select id="selectByUserId" parameterType="long" resultType="Disk">
+		select * from disk_ where userId = #{userId}
+	</select>
+
+	<insert id="add" parameterType="Disk">
+		insert into disk_ (userId, size)
+		values (#{userId}, #{size})
+	</insert>
+
+	<delete id="deleteByUserId" parameterType="long">
+		delete from disk_ where userId = #{userId}
+	</delete>
+		
+	<update id="updateByUserId" parameterType="Disk">
+		update disk_ 
+		<set>
+			<if test="size != null">
+				size = #{size},
+			</if>
+			<if test="usedSize != null">
+				usedSize = #{usedSize},
+			</if>
+			<if test="fileNumber != null">
+				fileNumber = #{fileNumber}
+			</if>
+		where userId = #{userid}
+		</set>  
+	</update>
+
+</mapper>

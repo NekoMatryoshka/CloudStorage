@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	//@Transactional: prepare for multiply tables updating...
 	public boolean register(User input) {
 		User user = mapper.selectByEmail(input.getEmail());
 		if (user != null)

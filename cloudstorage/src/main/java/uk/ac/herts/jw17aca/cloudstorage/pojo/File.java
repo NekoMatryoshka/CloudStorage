@@ -4,18 +4,39 @@ import org.apache.commons.lang.StringUtils;
 
 public class File {
 
-	private int id;
+	private long id;
 	private String name;
 	private String directory;
-	private int ownerId;
+	private long userId;
+	private long diskId;
 	private float size;
-//	private DateTime dateTime;
+	private String createDate;
+	
+	//lockFile function/password
+	//md5 function
+	//description function
+	//share function/url
+	
+	public long getdiskId() {
+		return diskId;
+	}
+	public void setdiskId(long diskId) {
+		this.diskId = diskId;
+	}
+	
+	public String getCreateDate() {
+		return createDate;
+	}
 
-	public int getId() {
+	public void getCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -35,12 +56,12 @@ public class File {
 		this.directory = directory;
 	}
 
-	public int getOwnerId() {
-		return ownerId;
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public float getSize() {

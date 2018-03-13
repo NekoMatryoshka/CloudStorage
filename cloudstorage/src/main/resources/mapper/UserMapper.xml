@@ -8,7 +8,7 @@
 		select * from user_ where email = #{email}
 	</select>
 
-	<select id="selectById" parameterType="int" resultType="User">
+	<select id="selectById" parameterType="long" resultType="User">
 		select * from user_ where id = #{id}
 	</select>
 
@@ -17,12 +17,24 @@
 		values (#{username}, #{password}, #{email})
 	</insert>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="long">
 		delete from user_ where id = #{id}
 	</delete>
 
 	<update id="update" parameterType="User">
-		update user_ set username = #{username}, email = #{email}, password = #{password}
+		update user_
+		<set>
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="password != null">
+				password = #{password}
+			</if>	  
 		where id = #{id}
+		</set>
 	</update>
+
 </mapper>
