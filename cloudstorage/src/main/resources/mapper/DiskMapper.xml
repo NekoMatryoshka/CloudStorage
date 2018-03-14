@@ -3,22 +3,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="uk.ac.herts.jw17aca.cloudstorage.mapper.DiskMapper">
-
-	<select id="selectByUserId" parameterType="long" resultType="Disk">
-		select * from disk_ where userId = #{userId}
-	</select>
-
+	
 	<insert id="add" parameterType="Disk">
-		insert into disk_ (userId, size)
-		values (#{userId}, #{size})
+		insert into disk_ (userId, size， rootDirectoryId)
+		values (#{userId}, #{size}, #{rootDirectoryId})
 	</insert>
+	
+	<select id="selectByUserId" parameterType="long" resultType="Disk">
+		select * from disk_ where UserId = #{UserId}
+	</select>
 
 	<delete id="deleteByUserId" parameterType="long">
 		delete from disk_ where userId = #{userId}
 	</delete>
-		
+
 	<update id="updateByUserId" parameterType="Disk">
-		update disk_ 
+		update disk_
 		<set>
 			<if test="size != null">
 				size = #{size},
@@ -29,8 +29,8 @@
 			<if test="fileNumber != null">
 				fileNumber = #{fileNumber}
 			</if>
-		where userId = #{userid}
-		</set>  
+			where userId = #{userid}
+		</set>
 	</update>
 
 </mapper>

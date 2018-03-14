@@ -1,23 +1,30 @@
 package uk.ac.herts.jw17aca.cloudstorage.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import uk.ac.herts.jw17aca.cloudstorage.mapper.UserMapper;
-import uk.ac.herts.jw17aca.cloudstorage.pojo.User;
-import uk.ac.herts.jw17aca.cloudstorage.service.UserService;
+import uk.ac.herts.jw17aca.cloudstorage.mapper.*;
+import uk.ac.herts.jw17aca.cloudstorage.pojo.*;
+import uk.ac.herts.jw17aca.cloudstorage.service.*;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
 	// auto inject mapper for accessing database
 	@Autowired
-	UserMapper mapper;
+	UserMapper userMapper;
+	@Autowired
+	DiskMapper diskMapper;
+	@Autowired
+	FileMapper fileMapper;
 
 	// implementation of login service.
 	public User login(String email, String password) {
 		// access database for user with same email, and inject it into an entity.
-		User user = mapper.selectByEmail(email);
+		User user = userMapper.selectByEmail(email);
 		// if a user has been found and matches
 		if (user != null && (user.getEmail().equals(email) && user.getPassword().equals(password)))
 			return user;
@@ -25,12 +32,22 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	//@Transactional: prepare for multiply tables updating...
+	@Transactional // unite multiply tables updating into a single transaction
 	public boolean register(User input) {
-		User user = mapper.selectByEmail(input.getEmail());
+		User user = userMapper.selectByEmail(input.getEmail());
 		if (user != null)
 			return false;
-		mapper.add(input);
+		userMapper.add(input);
+		//get the full info of new user, and create a root directory in table for him
+		User newUser = userMapper.selectByEmail(input.getEmail());
+		File rootDirectory = new File(-1, newUser.getUsername(), newUser.getUsername()+"/",
+				true, newUser.getId(), -1, new Date(), "");
+		fileMapper.add(rootDirectory);
+		//get the full info of the root directory of new user, and create a disk in table for him
+		File newUserRootDirectory = fileMapper.selectRootDirectoryByUserId(newUser.getId());
+		Disk newUserDisk = new Disk(newUser.getId(), newUserRootDirectory.getId());
+		diskMapper.add(newUserDisk);
+		
 		return true;
 	}
 

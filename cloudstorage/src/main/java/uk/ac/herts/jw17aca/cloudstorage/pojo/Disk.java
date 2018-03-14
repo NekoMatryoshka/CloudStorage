@@ -7,6 +7,15 @@ public class Disk {
 	private float size;
 	private float usedSize;
 	private int fileNumber;
+	private long rootDirectoryId;
+	
+	private static final float INITIAL_SIZE = 2048f;  //in MB
+	
+	public Disk(long userId, long rootDirectoryId) {
+		this.userId = userId;
+		this.size = INITIAL_SIZE; 
+		this.rootDirectoryId = rootDirectoryId;
+	}
 	
 	public long getId() {
 		return id;
@@ -43,6 +52,13 @@ public class Disk {
 		this.fileNumber = fileNumber;
 	}
 	
+	public long getRootDirectoryId() {
+		return rootDirectoryId;
+	}
+	public void setRootDirectoryId(long rootDirectoryId) {
+		this.rootDirectoryId = rootDirectoryId;
+	}
+	
 }
 
 //database sql commands
@@ -56,3 +72,4 @@ public class Disk {
 //primary key (id)
 //)ENGINE=InnoDB DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
+//alter table disk_ add rootDirectory int(11);

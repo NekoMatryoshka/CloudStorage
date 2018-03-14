@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="uk.ac.herts.jw17aca.cloudstorage.mapper.FileMapper">
+
+	<insert id="add" parameterType="File">
+		insert into file_ (parentId, name, directory, isDir, userId, diskId, size, createDate, serverLocation)
+		values (#{parentId}, #{name}, #{directory}, #{isDir}, #{userId}, #{diskId}, #{size}, #{createDate}, #{serverLocation})
+	</insert>
+
+	<delete id="delete" parameterType="long">
+		delete from file_ where id = #{id}
+	</delete>
+	
+	<select id="selectByParentId" parameterType="long" resultType="File">
+		select * from file_ where parentId = #{parentId}
+	</select>
+	
+	<select id="selectByFuzzyName" parameterType="string" resultType="File">
+		<bind name="likeName" value="'%' + fuzzyFileName + '%'" />
+		select * from file_ where name like #{likeName}
+	</select>	
+
+	<select id="selectById" parameterType="long" resultType="File">
+		select * from file_ where Id = #{Id}
+	</select>
+
+	<select id="selectRootDirectoryByUserId" parameterType="long" resultType="File">
+		select * from file_ where userId = #{userId} and parentId = -1
+	</select>	
+		
+	<update id="update" parameterType="File">
+		update user_
+		<set>
+			<if test="parentId != null">
+				parentId = #{parentId},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="directory != null">
+				directory = #{directory}
+			</if>  
+		where id = #{id}
+		</set>
+	</update>
+
+</mapper>

@@ -33,13 +33,13 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
 	<!-- config the interceptor -->
-<mvc:interceptors>
+	<mvc:interceptors>
         <mvc:interceptor>
         	<!-- intercept access to all path -->
             <mvc:mapping path="/**"/>
             <!-- interceptor class -->
             <bean class="uk.ac.herts.jw17aca.cloudstorage.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors> 
 
 </beans>
