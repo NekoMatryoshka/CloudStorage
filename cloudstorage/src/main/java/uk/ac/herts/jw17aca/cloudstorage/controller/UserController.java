@@ -19,7 +19,7 @@ public class UserController {
 
 	// auto inject service for service implementation methods
 	@Autowired
-	UserService service;
+	UserService userService;
 
 	// map this class to give url /login
 	@RequestMapping("/login")
@@ -28,8 +28,9 @@ public class UserController {
 		// encode name to avoid code injection
 		email = HtmlUtils.htmlEscape(email);
 		// try to login with given user data
-		User user = service.login(email, password);
+		User user = userService.login(email, password);
 		if (user != null) {
+			System.out.println("logincontroller: add user to session");
 			session.setAttribute("user", user);
 			return "main";
 		} else {
@@ -42,7 +43,8 @@ public class UserController {
 	public String register(Model model, User user) {
 		String email = HtmlUtils.htmlEscape(user.getEmail());
 		user.setEmail(email);
-		if(!service.register(user)) {
+		System.out.println("registercontroller: registering");
+		if(!userService.register(user)) {
 			model.addAttribute("message", "Account with this email already exists, please login.");
 			model.addAttribute("user", null);
 			return "error";

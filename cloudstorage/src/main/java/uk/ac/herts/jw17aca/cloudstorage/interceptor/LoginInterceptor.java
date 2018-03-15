@@ -15,8 +15,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// get requested url
 		String url = request.getRequestURL().toString();
 		// allowed url without login
-		String[] allowedURLs = new String[] { "/registerPage", "/loginPage" };
-		//System.out.println("requested URL: " + url);
+		String[] allowedURLs = new String[] { "/registerPage", "/loginPage", };
+		System.out.println("interceptor: requested URL: " + url);
 		// for allowed URLs, permit the access		
 		for (String allowedURL : allowedURLs) {
 			if (url.contains(allowedURL))
@@ -24,11 +24,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		// for URLs needing login, if user does not exist in session, deny the access
 		if (user == null) {
+			System.out.println("interceptor: user: null");
 			// send un-login user to login page
 			response.sendRedirect("loginPage");
 			return false;
 		}
 		// if already login, permit the access
+		//System.out.println("interceptor: user: yes");
 		return true;
 	}
 

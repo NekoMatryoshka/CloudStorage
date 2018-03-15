@@ -11,6 +11,8 @@ public class Disk {
 	
 	private static final float INITIAL_SIZE = 2048f;  //in MB
 	
+	public Disk() {}
+	
 	public Disk(long userId, long rootDirectoryId) {
 		this.userId = userId;
 		this.size = INITIAL_SIZE; 

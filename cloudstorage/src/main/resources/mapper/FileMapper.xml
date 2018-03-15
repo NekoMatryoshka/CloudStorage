@@ -5,8 +5,8 @@
 <mapper namespace="uk.ac.herts.jw17aca.cloudstorage.mapper.FileMapper">
 
 	<insert id="add" parameterType="File">
-		insert into file_ (parentId, name, directory, isDir, userId, diskId, size, createDate, serverLocation)
-		values (#{parentId}, #{name}, #{directory}, #{isDir}, #{userId}, #{diskId}, #{size}, #{createDate}, #{serverLocation})
+		insert into file_ (parentId, name_, directory_, isDir, userId, size, createDate, serverLocation)
+		values (#{parentId}, #{name}, #{directory}, #{isDir}, #{userId}, #{size}, #{createDate}, #{serverLocation})
 	</insert>
 
 	<delete id="delete" parameterType="long">
@@ -18,8 +18,7 @@
 	</select>
 	
 	<select id="selectByFuzzyName" parameterType="string" resultType="File">
-		<bind name="likeName" value="'%' + fuzzyFileName + '%'" />
-		select * from file_ where name like #{likeName}
+		select * from file_ where name like concat('%', #{fuzzyFileName}, '%')
 	</select>	
 
 	<select id="selectById" parameterType="long" resultType="File">
@@ -40,7 +39,7 @@
 				name = #{name},
 			</if>
 			<if test="directory != null">
-				directory = #{directory}
+				directory_ = #{directory}
 			</if>  
 		where id = #{id}
 		</set>

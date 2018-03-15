@@ -5,7 +5,7 @@
 <mapper namespace="uk.ac.herts.jw17aca.cloudstorage.mapper.DiskMapper">
 	
 	<insert id="add" parameterType="Disk">
-		insert into disk_ (userId, size， rootDirectoryId)
+		insert into disk_ (userId, size, rootDirectory)
 		values (#{userId}, #{size}, #{rootDirectoryId})
 	</insert>
 	

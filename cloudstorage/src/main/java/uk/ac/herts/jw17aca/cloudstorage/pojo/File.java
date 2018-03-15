@@ -19,6 +19,8 @@ public class File {
 	// description function
 	// share function/url
 	
+	public File() {}
+
 	public File(long parentId, String name, String directory, boolean isDir, long userId, float size,
 			Date createDate, String serverLocation) {
 		this.parentId = parentId;
