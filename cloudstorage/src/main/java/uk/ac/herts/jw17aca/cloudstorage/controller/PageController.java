@@ -18,7 +18,7 @@ public class PageController {
     }
     
     @RequestMapping("/home/disk")
-    public String home() {
+    public String home0() {
         return "home";
     }
     

@@ -1,3 +1,3 @@
 <%
-    response.sendRedirect("loginPage");
+	response.sendRedirect("loginPage");
 %>

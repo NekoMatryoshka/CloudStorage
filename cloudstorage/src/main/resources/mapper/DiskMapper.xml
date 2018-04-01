@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="selectByUserId" parameterType="long" resultType="Disk">
-		select * from disk_ where UserId = #{UserId}
+		select * from disk_ where userId = #{userId}
 	</select>
 
 	<delete id="deleteByUserId" parameterType="long">
@@ -29,7 +29,7 @@
 			<if test="fileNumber != null">
 				fileNumber = #{fileNumber}
 			</if>
-			where userId = #{userid}
+			where userId = #{userId}
 		</set>
 	</update>
 

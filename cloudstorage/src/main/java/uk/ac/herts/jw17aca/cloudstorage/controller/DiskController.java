@@ -34,7 +34,7 @@ public class DiskController {
 	// upload file
 	@RequestMapping("/upload/{folderId}")
 	@ResponseBody
-	public String uploadFile(HttpServletRequest req, @PathVariable long folderId) {
+	public void uploadFile(HttpServletRequest req, @PathVariable long folderId) {
 
 	}
 

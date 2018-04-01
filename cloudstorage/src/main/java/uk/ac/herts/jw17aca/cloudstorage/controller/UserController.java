@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
@@ -25,12 +24,13 @@ public class UserController {
 
 	// map this class to give url /login
 	@RequestMapping("/login")
-	public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model,
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpSession session) {
 		// encode name to avoid code injection
 		email = HtmlUtils.htmlEscape(email);
 		// try to login with given user data
 		User user = userService.login(email, password);
+		System.out.println("logincontroller: email " + email + " password " + password);
 		if (user != null) {
 			System.out.println("logincontroller: add user to session");
 			session.setAttribute("user", user);
@@ -46,8 +46,8 @@ public class UserController {
 	// ajax check login
 	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public String checkLogin(HttpSession session) {
-		User user = (User) session.getAttribute("user");
+	public String checkLogin(@RequestParam("email") String email, @RequestParam("password") String password) {
+		User user = userService.login(email, password);
 		if (user != null)
 			return "true";
 		return "false";
@@ -68,8 +68,8 @@ public class UserController {
 		System.out.println("registercontroller: registering");
 		User newUser = userService.register(user);
 		// login if success
-		session.setAttribute("user", user);
-		Disk disk = diskService.loadDiskInfo(user.getId());
+		session.setAttribute("user", newUser);
+		Disk disk = diskService.loadDiskInfo(newUser.getId());
 		session.setAttribute("disk", disk);
 		session.setAttribute("rootDirectoryID", disk.getRootDirectoryId());
 		return "redirect:/home/disk";
