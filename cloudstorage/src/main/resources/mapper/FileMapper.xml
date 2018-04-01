@@ -28,6 +28,10 @@
 	<select id="selectRootDirectoryByUserId" parameterType="long" resultType="File">
 		select * from file_ where userId = #{userId} and parentId = -1
 	</select>	
+	
+	<select id="getTotalUsedSizeByUserId" parameterType="long" resultType="float">
+		select sum(size) from file_ where userId = #{userId}
+	</select>		
 		
 	<update id="update" parameterType="File">
 		update user_

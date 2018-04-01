@@ -11,15 +11,25 @@ public class PageController {
     public String registerPage() {
         return "register";
     }
-    
-//    @RequestMapping("registerSuccessPage")
-//    public String registerSuccessPage() {
-//        return "registerSuccess";
-//    }
-    
+        
     @RequestMapping("/loginPage")
     public String loginPage() {
         return "login";
+    }
+    
+    @RequestMapping("/home/disk")
+    public String home() {
+        return "home";
+    }
+    
+    @RequestMapping("/home/")
+    public String home1() {
+        return "redirect:/home/disk";
+    }
+    
+    @RequestMapping("/home")
+    public String home2() {
+        return "redirect:/home/disk";
     }
     
 }

@@ -9,13 +9,13 @@ public class Disk {
 	private int fileNumber;
 	private long rootDirectoryId;
 	
-	private static final float INITIAL_SIZE = 2048f;  //in MB
+	private static final float INITIAL_TOTAL_SIZE = 1024*1024*5;  
 	
 	public Disk() {}
 	
 	public Disk(long userId, long rootDirectoryId) {
 		this.userId = userId;
-		this.size = INITIAL_SIZE; 
+		this.size = INITIAL_TOTAL_SIZE; 
 		this.rootDirectoryId = rootDirectoryId;
 	}
 	

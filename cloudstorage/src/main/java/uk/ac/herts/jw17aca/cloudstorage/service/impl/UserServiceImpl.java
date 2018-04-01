@@ -32,22 +32,25 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	@Transactional // unite multiply tables updating into a single transaction
-	public boolean register(User input) {
-		User user = userMapper.selectByEmail(input.getEmail());
-		if (user != null)
-			return false;
+	@Transactional // unite multiply tables updating into a single transaction for roll back
+	public User register(User input) {
 		userMapper.add(input);
-		//get the full info of new user, and create a root directory in table for him
+		// get the full info of new user, and create a root directory in table for him
 		User newUser = userMapper.selectByEmail(input.getEmail());
-		File rootDirectory = new File(-1, newUser.getUsername(), newUser.getUsername()+"/",
-				true, newUser.getId(), -1, new Date(), "");
+		File rootDirectory = new File(-1, newUser.getUsername(), "/", true, newUser.getId(), 0, new Date(), "");
 		fileMapper.add(rootDirectory);
-		//get the full info of the root directory of new user, and create a disk in table for him
+		// get the full info of the root directory of new user, and create a disk in
+		// table for him
 		File newUserRootDirectory = fileMapper.selectRootDirectoryByUserId(newUser.getId());
 		Disk newUserDisk = new Disk(newUser.getId(), newUserRootDirectory.getId());
 		diskMapper.add(newUserDisk);
-		
+		return newUser;
+	}
+
+	public boolean checkEmail(String email) {
+		User user = userMapper.selectByEmail(email);
+		if (user != null)
+			return false;
 		return true;
 	}
 

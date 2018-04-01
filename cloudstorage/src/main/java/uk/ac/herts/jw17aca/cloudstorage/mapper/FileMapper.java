@@ -15,5 +15,6 @@ public interface FileMapper {
 	
 	public File selectById(long fileId);
 	public File selectRootDirectoryByUserId(long userId);
+	public float getTotalUsedSizeByUserId(long userId);
 				
 }
