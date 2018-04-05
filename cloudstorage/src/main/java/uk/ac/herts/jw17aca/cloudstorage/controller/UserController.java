@@ -32,10 +32,12 @@ public class UserController {
 		User user = userService.login(email, password);
 		System.out.println("logincontroller: email " + email + " password " + password);
 		if (user != null) {
-			System.out.println("logincontroller: add user to session");
+			System.out.println("logincontroller: user: " + user.toString());
 			session.setAttribute("user", user);
 			Disk disk = diskService.loadDiskInfo(user.getId());
+			System.out.println("logincontroller: disk: " + disk.toString());
 			session.setAttribute("disk", disk);
+			System.out.println("logincontroller: rootDirectoryID: " + disk.getRootDirectoryId());
 			session.setAttribute("rootDirectoryID", disk.getRootDirectoryId());
 			return "redirect:/home/disk";
 		} else {

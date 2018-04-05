@@ -26,8 +26,8 @@ public class DiskController {
 	// list subfiles
 	@RequestMapping("/listSubfiles")
 	@ResponseBody
-	public String listSubFiles(long parentFileId) {
-		List<File> files = diskService.loadFileList(parentFileId);
+	public String listSubFiles(long id) {
+		List<File> files = diskService.loadFileList(id);
 		return JSON.toJSONString(files);
 	}
 

@@ -9,12 +9,18 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<%@include file="/WEB-INF/jsp/include/header.jsp"%>
+<script src="js/jquery/2.0.0/jquery.min.js"></script>
+<script src="js/bootstrap/3.3.6/bootstrap.min.js"></script>
+<script src="js/zTree/jquery.ztree.core-3.5.min.js"></script>
+<script src="js/zTree/jquery.ztree.exedit-3.5.min.js"></script>
+<link href="css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet" />
+<link href="css/zTree/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
 
 </head>
 
 <body>
-
+	
+	版本2
 	<form id="loginForm" action="user/login" method="post">
 		Email: <input type="text" id="email" name="email" value=""> <br />
 		Password: <input type="password" id="password" name="password" value=""> <br /> 

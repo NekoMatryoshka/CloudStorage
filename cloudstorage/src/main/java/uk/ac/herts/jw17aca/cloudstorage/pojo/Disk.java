@@ -60,6 +60,12 @@ public class Disk {
 	public void setRootDirectoryId(long rootDirectoryId) {
 		this.rootDirectoryId = rootDirectoryId;
 	}
+
+	@Override
+	public String toString() {
+		return "Disk [id=" + id + ", userId=" + userId + ", size=" + size + ", usedSize=" + usedSize + ", fileNumber="
+				+ fileNumber + ", rootDirectoryId=" + rootDirectoryId + "]";
+	}
 	
 }
 
