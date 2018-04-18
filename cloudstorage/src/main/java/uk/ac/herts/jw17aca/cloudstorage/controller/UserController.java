@@ -55,14 +55,6 @@ public class UserController {
 		return "false";
 	}
 
-	// log out
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		// invalidate session when log out
-		session.invalidate();
-		return "redirect:/";
-	}
-
 	@RequestMapping("/register")
 	public String register(HttpSession session, User user) {
 		String email = HtmlUtils.htmlEscape(user.getEmail());

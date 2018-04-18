@@ -4,6 +4,7 @@ import java.util.List;
 
 import uk.ac.herts.jw17aca.cloudstorage.pojo.Disk;
 import uk.ac.herts.jw17aca.cloudstorage.pojo.File;
+import uk.ac.herts.jw17aca.cloudstorage.pojo.User;
 
 public interface DiskService {
 	
@@ -11,9 +12,10 @@ public interface DiskService {
 	public boolean isEnoughSpace(File file);
 	public File getFile(long fileId);
 	public List<File> loadFileList(long parentFileId);
-	public void mkDir(long parentFileId, String folderName);
+	public String mkDir(long parentFileId, String folderName);
 	public void renameFile(long fileId, String newFileName);
 	public void moveFile(long fromFileId, long toFileId);
-	public void deleteFile(long fileId);
+	public String deleteFile(long fileId);
+	public boolean uploadFile(File uploadFile);
 	
 }

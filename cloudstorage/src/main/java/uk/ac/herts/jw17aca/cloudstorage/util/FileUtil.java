@@ -13,11 +13,11 @@ import uk.ac.herts.jw17aca.cloudstorage.pojo.File;
 public class FileUtil {
 
 	// path to save files;
-	public static final String FILE_PATH = "/home/disk/files/";
+	public static final String FILE_PATH = "/disk/files/";
 
 	// get all files from request
 	public static List<MultipartFile> getFiles(HttpServletRequest req) {
-
+		
 		MultipartHttpServletRequest mreq = (MultipartHttpServletRequest) req;
 		Map<String, MultipartFile> fileMap = mreq.getFileMap();
 		List<MultipartFile> fileList = new ArrayList<>();

@@ -5,7 +5,7 @@
 <mapper namespace="uk.ac.herts.jw17aca.cloudstorage.mapper.DiskMapper">
 	
 	<insert id="add" parameterType="Disk">
-		insert into disk_ (userId, size, rootDirectory)
+		insert into disk_ (userId, size, rootDirectoryId)
 		values (#{userId}, #{size}, #{rootDirectoryId})
 	</insert>
 	
@@ -18,19 +18,7 @@
 	</delete>
 
 	<update id="updateByUserId" parameterType="Disk">
-		update disk_
-		<set>
-			<if test="size != null">
-				size = #{size},
-			</if>
-			<if test="usedSize != null">
-				usedSize = #{usedSize},
-			</if>
-			<if test="fileNumber != null">
-				fileNumber = #{fileNumber}
-			</if>
-			where userId = #{userId}
-		</set>
+		update disk_ set size = #{size}, usedSize = #{usedSize}, fileNumber = #{fileNumber} where userId = #{userId}
 	</update>
 
 </mapper>

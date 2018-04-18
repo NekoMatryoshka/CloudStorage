@@ -19,12 +19,11 @@
 </head>
 
 <body>
-	
-	版本2
+
 	<form id="loginForm" action="user/login" method="post">
-		Email: <input type="text" id="email" name="email" value=""> <br />
-		Password: <input type="password" id="password" name="password" value=""> <br /> 
-		<input type="submit" id="login" value="login" onclick="checkLogin()"> <br />
+		Email: <input type="text" id="email" name="email" value="" /> <br />
+		Password: <input type="password" id="password" name="password" value="" /> <br /> 
+		<input type="submit" id="login" value="login" onclick="checkLogin()" /> <br />
 	</form>
 	<a href="registerPage">register</a>
 
