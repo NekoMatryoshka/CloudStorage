@@ -1,36 +1,37 @@
 package uk.ac.herts.jw17aca.cloudstorage.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-import uk.ac.herts.jw17aca.cloudstorage.mapper.UserMapper;
-import uk.ac.herts.jw17aca.cloudstorage.pojo.User;
-import uk.ac.herts.jw17aca.cloudstorage.service.UserService;
+import uk.ac.herts.jw17aca.cloudstorage.mapper.*;
+import uk.ac.herts.jw17aca.cloudstorage.pojo.*;
+import uk.ac.herts.jw17aca.cloudstorage.service.*;
 
-@Transactional
-@RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class UserServiceTest {
+public class UserServiceTest1 {
 
-	@Autowired
 	private UserService service;
-		
+
+	@Before
+	public void setUp() {
+		ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:applicationContext.xml");
+		service = (UserService) ac.getBean("UserService");
+	}
+
 	@Test
 	public void testLogin() {
 		User user = service.login("123456@123.com", "123456");
-		assertEquals(user.getId(), 17l);
+		assertEquals(user.getId(), 13l);
 	}
-	
+
 	@Test
-	@Rollback(true)
 	public void testRegister() {
 		User user = new User();
 		user.setEmail("test");
@@ -39,10 +40,10 @@ public class UserServiceTest {
 		service.register(user);
 		assertTrue(service.login("test", "test") != null);
 	}
-	
+
 	@Test
 	public void testCheckEmail() {
 		assertTrue(!service.checkEmail("123456@123.com"));
 	}
-	
+
 }

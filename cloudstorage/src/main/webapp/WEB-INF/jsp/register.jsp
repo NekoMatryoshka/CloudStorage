@@ -40,19 +40,19 @@
 		
 		if (!emailRegExp.exec($("#email").val())) {
 			alert("Please input a valid email address! Please try again.");
-			return false;
+			return;
 		}
 		if (!usernameAndPasswordRegExp.exec($("#username").val())) {
 			alert("Username should be 6-12 digit containing only letter, number and underline! Please try again.");
-			return false;
+			return;
 		}
 		if (!usernameAndPasswordRegExp.exec($("#password").val())) {
 			alert("Password should be 6-12 digit containing only letter, number and underline! Please try again.");
-			return false;
+			return;
 		}	
 		if ($("#password").val() != $("#confirmPassword").val()) {
 			alert("Confirmed password does not match with password! Please try again.");
-			return false;
+			return;
 		}
 		
 		$.ajax({
@@ -65,13 +65,12 @@
 				console.log(res);
 				if (res == "false") {
 					alert("Email has already been used! Please try again.");
-					return false;
+					return;
+				} else{
+					$('#registerForm').submit();
 				}
 			}
-		});
-		
-		$('#registerForm').submit();
-		return true;
+		});	
 	}
 </script>
 </html>
